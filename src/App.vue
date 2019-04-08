@@ -1,45 +1,16 @@
 <template>
   <div id="app">
     <Header />
-    <AddTodo  v-on:handleAdd="handleAdd" />
-    <Todos :todos="todos" @handleDelete="handleDelete" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Todos from './components/Todos'
 import Header from "./components/layout/Header";
-import AddTodo from './components/AddTodo'
-import axios from 'axios'
 export default {
   name: "app",
-  data() {
-    return {
-      msg: "hello",
-      todos:[
-       
-      ]
-    }
-  },
   components:{
-    Todos,
-    Header,
-    AddTodo
-  },
-  methods:{
-    handleDelete(id) { 
-      // console.log(id);
-      this.todos = this.todos.filter(todo => todo.id !== id)
-    },
-    handleAdd(newTodo) {
-      this.todos = [...this.todos,newTodo];
-    }
-  },
-  created() {
-    // 数据请求
-    axios.get("http://jsonplaceholder.typicode.com/todos?_limit=10")
-    .then(res=>this.todos = res.data)
-    .catch(err=>console.log(err));
+    Header
   }
 }
 </script>
